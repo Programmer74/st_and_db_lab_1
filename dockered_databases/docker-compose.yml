@@ -14,3 +14,10 @@ services:
       - 3306:3306
     image: st_and_db_1_mysql_image
     container_name: st_and_db_1_mysql
+  mongo:
+    build:
+      context: ./containers/mongo
+    ports:
+      - 27017:27017
+    image: st_and_db_1_mongo_image
+    container_name: st_and_db_1_mongo
