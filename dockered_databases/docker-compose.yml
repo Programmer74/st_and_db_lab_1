@@ -14,6 +14,15 @@ services:
       - 3306:3306
     image: st_and_db_1_mysql_image
     container_name: st_and_db_1_mysql
+  oracle:
+    build:
+      context: ./containers/oracle
+    ports:
+      - 1521:1521
+    image: st_and_db_1_oracle_image
+    container_name: st_and_db_1_oracle
+    volumes:
+      - ~/st_and_db_labs_data/oracle:/opt/oracle/oradata
   mongo:
     build:
       context: ./containers/mongo
