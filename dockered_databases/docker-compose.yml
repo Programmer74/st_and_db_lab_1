@@ -1,0 +1,16 @@
+version: '3'
+services:
+  postgre:
+    build:
+      context: ./containers/postgre
+    ports:
+      - 5432:5432
+    image: st_and_db_1_postgre_image
+    container_name: st_and_db_1_postgre
+  mysql:
+    build:
+      context: ./containers/mysql
+    ports:
+      - 3306:3306
+    image: st_and_db_1_mysql_image
+    container_name: st_and_db_1_mysql
