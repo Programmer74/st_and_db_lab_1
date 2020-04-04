@@ -1,4 +1,3 @@
-## default connection pool
 spring:
   datasource:
     hikari:
