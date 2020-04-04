@@ -1,0 +1,15 @@
+## default connection pool
+spring:
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    url: jdbc:postgresql://localhost:5432/st_and_db_postgres_database
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:migrations/postgre
+    enabled: true
