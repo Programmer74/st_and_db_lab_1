@@ -9,9 +9,11 @@ import com.programmer74.sdl1.postgre.entities.Discipline
 import com.programmer74.sdl1.postgre.repositories.AssessmentRepository
 import com.programmer74.sdl1.postgre.repositories.DisciplineRepository
 import mu.KLogging
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import kotlin.math.abs
 
+@Profile("postgre")
 @Service
 class PostgreDummyDataGenerator(
   private val disciplineRepository: DisciplineRepository,

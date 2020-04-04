@@ -3,13 +3,13 @@ spring:
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5
-    url: jdbc:postgresql://localhost:5432/st_and_db_postgres_database
+    url: jdbc:mysql://127.0.0.1:3306/st_and_db_mysql_database
     username: admin
     password: admin
   jpa:
     hibernate:
       ddl-auto: validate
   flyway:
-    locations: classpath:migrations/postgre
+    locations: classpath:migrations/mysql
     enabled: true
     baselineOnMigrate: true
