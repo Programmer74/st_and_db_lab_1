@@ -32,4 +32,10 @@ data class Assessment(
 
   @Column(nullable = false)
   val studentId: Int
-)
+) {
+  override fun toString(): String {
+    return "Assessment(id=$id, discipline=${discipline.id}-${discipline.disciplineName}, " +
+        "score=$score, date=$date, teacherName='$teacherName', teacherId=$teacherId, " +
+        "studentName='$studentName', studentId=$studentId)"
+  }
+}

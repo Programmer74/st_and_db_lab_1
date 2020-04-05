@@ -25,7 +25,15 @@ class PostgreDummyDataGenerator(
       logger.warn { "Beginning generating dummy data" }
       generateDummyData()
     } else {
-      throw IllegalStateException("PostgreDataGenerator had already done everything it was supposed to")
+      logger.error { "PosgtresDataGenerator had already done everything it was supposed to" }
+      logger.warn { "Generated disciplines:" }
+      disciplineRepository.findAll().forEach {
+        logger.warn { " - $it" }
+      }
+      logger.warn { "Generated assessments:" }
+      assessmentRepository.findAll().forEach {
+        logger.warn { " - $it" }
+      }
     }
   }
 
