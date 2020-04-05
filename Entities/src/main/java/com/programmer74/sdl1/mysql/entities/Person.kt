@@ -15,5 +15,8 @@ data class Person(
   val name: String,
 
   @Column(nullable = false)
-  val position: String
+  val position: String,
+
+  @ManyToMany(mappedBy = "participants", fetch = FetchType.EAGER)
+  val conferences: MutableList<Conference> = ArrayList()
 )

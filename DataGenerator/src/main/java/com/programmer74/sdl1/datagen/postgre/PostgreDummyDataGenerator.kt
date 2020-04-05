@@ -25,7 +25,7 @@ class PostgreDummyDataGenerator(
       logger.warn { "Beginning generating dummy data" }
       generateDummyData()
     } else {
-      throw IllegalStateException("I had already done everything I was supposed to")
+      throw IllegalStateException("PostgreDataGenerator had already done everything it was supposed to")
     }
   }
 

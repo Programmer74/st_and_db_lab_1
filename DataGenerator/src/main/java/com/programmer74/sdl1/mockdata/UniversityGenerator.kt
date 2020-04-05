@@ -28,6 +28,14 @@ object UniversityGenerator {
       "09.03.04 – Разработка программно-информационных систем (Академический магистр)"
   )
 
+  val positionNames = listOf(
+      "бакалавр", "магистр", "доцент"
+  )
+
+  val conferenceNames = listOf(
+      "КМУ", "Майоровские чтения"
+  )
+
   fun getRandomSemesterNumber() = (1 until 8).random()
   fun getRandomHours() = (0 until 40).random()
   fun getRandomScore() = (0 until 100).random()

@@ -18,5 +18,22 @@ data class Conference(
   val place: String,
 
   @Column(nullable = false)
-  val date: Long
-)
+  val date: Long,
+
+  @ManyToMany(
+      fetch = FetchType.EAGER,
+      cascade = [
+        CascadeType.PERSIST,
+        CascadeType.MERGE
+      ])
+  @JoinTable(
+      name = "conference_participant",
+      joinColumns = [JoinColumn(name = "conference_id")],
+      inverseJoinColumns = [JoinColumn(name = "person_id")])
+  val participants: MutableList<Person> = ArrayList()
+) {
+  fun addParticipant(person: Person) {
+    participants.add(person)
+    person.conferences.add(this)
+  }
+}
