@@ -14,8 +14,9 @@ data class BookTaken(
   @Column(nullable = false)
   val bookName: String,
 
-  @Column(nullable = false)
-  val takenBy: Int,
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "taken_by", nullable = false)
+  val takenBy: Person,
 
   @Column(nullable = false)
   val takenAt: Long,

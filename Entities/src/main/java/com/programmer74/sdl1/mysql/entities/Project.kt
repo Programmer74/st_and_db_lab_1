@@ -18,5 +18,26 @@ data class Project(
   val dateFrom: Long,
 
   @Column(nullable = false)
-  val dateTo: Long
-)
+  val dateTo: Long,
+
+  @ManyToMany(
+      fetch = FetchType.EAGER,
+      cascade = [
+        CascadeType.PERSIST,
+        CascadeType.MERGE
+      ])
+  @JoinTable(
+      name = "project_worker",
+      joinColumns = [JoinColumn(name = "project_id")],
+      inverseJoinColumns = [JoinColumn(name = "person_id")])
+  val workers: MutableList<Person> = ArrayList()
+) {
+  fun addWorker(person: Person) {
+    workers.add(person)
+    person.projects.add(this)
+  }
+
+  override fun toString(): String {
+    return "Project(id=$id, name='$name', dateFrom=$dateFrom, dateTo=$dateTo, workers: ${workers.size})"
+  }
+}

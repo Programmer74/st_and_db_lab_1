@@ -36,6 +36,22 @@ object UniversityGenerator {
       "КМУ", "Майоровские чтения"
   )
 
+  val publicationTypes = listOf(
+      "статья", "тезисы"
+  )
+
+  val languages = listOf(
+      "русский"
+  )
+
+  val sources = listOf(
+      "Москва", "Тверь", "Санкт-Петербург"
+  )
+
+  val sourceTypes = listOf(
+      "ВАК", "РИНЦ"
+  )
+
   fun getRandomSemesterNumber() = (1 until 8).random()
   fun getRandomHours() = (0 until 40).random()
   fun getRandomScore() = (0 until 100).random()

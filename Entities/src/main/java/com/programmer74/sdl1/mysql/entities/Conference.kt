@@ -36,4 +36,8 @@ data class Conference(
     participants.add(person)
     person.conferences.add(this)
   }
+
+  override fun toString(): String {
+    return "Conference(id=$id, name='$name', place='$place', date=$date, participants: ${participants.size})"
+  }
 }
