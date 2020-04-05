@@ -1,6 +1,5 @@
 package com.programmer74.sdl1.oracle.entities
 
-import java.time.Instant
 import javax.persistence.*
 
 @Entity
@@ -15,8 +14,9 @@ data class LessonEntry(
   @Column(nullable = false)
   val name: String,
 
-  @Column(nullable = false)
-  val teacherId: Int,
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "teacher_id", nullable = false)
+  val teacher: Person,
 
   @Column(nullable = false)
   val weekday: Int,
@@ -28,5 +28,9 @@ data class LessonEntry(
   val minute: Int,
 
   @Column(nullable = false)
-  val room: String
+  val room: String,
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "group_id", nullable = false)
+  val studyGroup: StudyGroup
 )

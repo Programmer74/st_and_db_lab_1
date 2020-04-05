@@ -1,5 +1,8 @@
 package com.programmer74.sdl1.mockdata
 
+import java.time.Duration
+import java.time.Instant
+
 object NameSurnameGenerator {
 
   fun getRandomName(): String {
@@ -25,6 +28,15 @@ object NameSurnameGenerator {
 
     return "$surname $name"
   }
+
+  fun generateRandomBirthDate() =
+      Instant.now().minusMillis(Duration.ofHours(20 * 365 * 24).toMillis())
+
+  val birthPlaces = listOf(
+      "Москва",
+      "Санкт-Петербург",
+      "Челябинск"
+  )
 
   private val maleNames = listOf(
       "Александр",

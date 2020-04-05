@@ -22,5 +22,9 @@ data class Assessment(
   val markLetter: String,
 
   @Column(nullable = false)
-  val achievedAt: Instant
+  val achievedAt: Instant,
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "achieved_by", nullable = false)
+  val achievedBy: Person
 )

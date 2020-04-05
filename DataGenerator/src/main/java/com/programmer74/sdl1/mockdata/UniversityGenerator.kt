@@ -29,7 +29,7 @@ object UniversityGenerator {
   )
 
   val positionNames = listOf(
-      "бакалавр", "магистр", "доцент"
+      "студент бакалавриата", "студент магистратуры", "доцент"
   )
 
   val conferenceNames = listOf(
@@ -50,6 +50,23 @@ object UniversityGenerator {
 
   val sourceTypes = listOf(
       "ВАК", "РИНЦ"
+  )
+
+  val groupNames = listOf(
+      "P3111",
+      "P3211",
+      "P3311",
+      "P3411",
+      "P4116",
+      "P41142"
+  )
+
+  val schoolNames = listOf(
+      "09.04.04 – Программная инженерия"
+  )
+
+  val qualificationNames = listOf(
+      "бакалавр", "магистр"
   )
 
   fun getRandomSemesterNumber() = (1 until 8).random()
