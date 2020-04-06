@@ -9,6 +9,7 @@ import mu.KLogging
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import java.time.Duration
+import javax.annotation.PostConstruct
 
 @Suppress("SameParameterValue")
 @Profile("mysql")
@@ -20,7 +21,9 @@ class MysqlDummyDataGenerator(
   private val projectRepository: ProjectRepository,
   private val bookTakenRepository: BookTakenRepository
 ) {
-  init {
+
+  @PostConstruct
+  fun startGenerator() {
     if (personRepository.findAll().toList().isEmpty()) {
       logger.warn { "Beginning generating dummy data" }
       generateDummyData()

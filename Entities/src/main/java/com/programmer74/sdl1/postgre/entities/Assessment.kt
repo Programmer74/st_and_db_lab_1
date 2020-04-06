@@ -25,17 +25,17 @@ data class Assessment(
   val teacherName: String,
 
   @Column(nullable = false)
-  val teacherId: Int,
+  val teacherId: String,
 
   @Column(nullable = false)
   val studentName: String,
 
   @Column(nullable = false)
-  val studentId: Int
+  val studentId: String
 ) {
   override fun toString(): String {
     return "Assessment(id=$id, discipline=${discipline.id}-${discipline.disciplineName}, " +
-        "score=$score, date=$date, teacherName='$teacherName', teacherId=$teacherId, " +
-        "studentName='$studentName', studentId=$studentId)"
+        "score=$score, date=$date, teacherName='$teacherName', teacherId='$teacherId', " +
+        "studentName='$studentName', studentId='$studentId')"
   }
 }

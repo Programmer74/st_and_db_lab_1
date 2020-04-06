@@ -13,6 +13,9 @@ data class Person(
   val id: Int? = null,
 
   @Column(nullable = false)
+  val sid: String,
+
+  @Column(nullable = false)
   val name: String,
 
   @Column(nullable = false)
@@ -43,7 +46,7 @@ data class Person(
   val studyGroups: MutableSet<StudyGroup> = HashSet()
 ) {
   override fun toString(): String {
-    return "Person(id=$id, name='$name', birthDate=$birthDate, birthPlace='$birthPlace', " +
+    return "Person(id=$id, sid='$sid', name='$name', birthDate=$birthDate, birthPlace='$birthPlace', " +
         "faculty='$faculty', position='$position', isContractStudent=$isContractStudent, " +
         "contractFrom=$contractFrom, contractTo=$contractTo)"
   }

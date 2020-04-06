@@ -15,6 +15,7 @@ import mu.KLogging
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import java.time.Instant
+import javax.annotation.PostConstruct
 
 @Profile("oracle")
 @Service
@@ -25,7 +26,8 @@ class OracleDummyDataGenerator(
   private val assessmentRepository: AssessmentRepository
 ) {
 
-  init {
+  @PostConstruct
+  fun startGenerator() {
     if (personRepository.findAll().toList().isEmpty()) {
       logger.warn { "Beginning generating dummy data" }
       generateDummyData()
@@ -66,8 +68,10 @@ class OracleDummyDataGenerator(
   }
 
   private fun generateAndSaveRandomPeople(count: Int) = (0 until count).map {
+    val name = NameSurnameGenerator.getRandomName()
     Person(
-        name = NameSurnameGenerator.getRandomName(),
+        sid = NameSurnameGenerator.studentIdByName(name),
+        name = name,
         birthDate = NameSurnameGenerator.generateRandomBirthDate(),
         birthPlace = NameSurnameGenerator.birthPlaces.random(),
         faculty = UniversityGenerator.facultyNames.random(),

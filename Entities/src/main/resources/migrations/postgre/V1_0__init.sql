@@ -21,9 +21,9 @@ CREATE TABLE assessment
     score         INT    NOT NULL,
     date          BIGINT NOT NULL, -- ISO TIMESTAMP
     teacher_name  TEXT   NOT NULL,
-    teacher_id    INT    NOT NULL,
+    teacher_id    TEXT   NOT NULL,
     student_name  TEXT   NOT NULL,
-    student_id    INT    NOT NULL
+    student_id    TEXT   NOT NULL
 );
 
 ALTER TABLE assessment

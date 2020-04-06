@@ -11,6 +11,7 @@ import com.programmer74.sdl1.postgre.repositories.DisciplineRepository
 import mu.KLogging
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
+import javax.annotation.PostConstruct
 import kotlin.math.abs
 
 @Profile("postgre")
@@ -20,7 +21,8 @@ class PostgreDummyDataGenerator(
   private val assessmentRepository: AssessmentRepository
 ) {
 
-  init {
+  @PostConstruct
+  fun startGenerator() {
     if (disciplineRepository.findAll().toList().isEmpty()) {
       logger.warn { "Beginning generating dummy data" }
       generateDummyData()
@@ -41,15 +43,17 @@ class PostgreDummyDataGenerator(
     val disciplines = generateDummyDisciplines()
     (0 until 20).map {
       val discipline = disciplines.random()
+      val studentName = NameSurnameGenerator.getRandomName()
+      val teacherName = discipline.teacherName()
       Assessment(
           null,
           discipline,
           UniversityGenerator.getRandomScore(),
           System.currentTimeMillis(),
-          discipline.teacherName(),
-          0,
-          NameSurnameGenerator.getRandomName(),
-          0
+          teacherName,
+          NameSurnameGenerator.studentIdByName(teacherName),
+          studentName,
+          NameSurnameGenerator.studentIdByName(studentName)
       )
     }.forEach { assessmentRepository.save(it) }
   }
