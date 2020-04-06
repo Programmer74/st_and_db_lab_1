@@ -8,6 +8,7 @@
     <modules>
         <module>Entities</module>
         <module>DataGenerator</module>
+        <module>DataGeneratorMongo</module>
     </modules>
 
     <parent>
@@ -143,10 +144,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <!-- tests -->
         <dependency>
