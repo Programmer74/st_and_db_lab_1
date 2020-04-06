@@ -32,6 +32,8 @@ object NameSurnameGenerator {
   fun generateRandomBirthDate() =
       Instant.now().minusMillis(Duration.ofHours(20 * 365 * 24).toMillis())
 
+  fun studentIdByName(s: String) = "s${s.hashCode()}"
+
   val birthPlaces = listOf(
       "Москва",
       "Санкт-Петербург",

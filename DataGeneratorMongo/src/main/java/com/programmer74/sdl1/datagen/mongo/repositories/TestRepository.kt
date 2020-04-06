@@ -1,6 +1,8 @@
 package com.programmer74.sdl1.datagen.mongo.repositories
 
-import com.programmer74.sdl1.mongo.entities.Test
+import com.programmer74.sdl1.mongo.entities.DormitoryInhabitat
+import com.programmer74.sdl1.mongo.entities.DormitoryPerson
 import org.springframework.data.mongodb.repository.MongoRepository
 
-interface TestRepository : MongoRepository<Test, String>
+interface DormitoryPersonRepository: MongoRepository<DormitoryPerson, String>
+interface DormitoryInhabitatRepository: MongoRepository<DormitoryInhabitat, String>

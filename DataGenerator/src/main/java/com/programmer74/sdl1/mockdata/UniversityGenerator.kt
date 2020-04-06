@@ -69,6 +69,11 @@ object UniversityGenerator {
       "бакалавр", "магистр"
   )
 
+  val dormitories = listOf(
+      "Вяземский пер., 3А",
+      "Белорусская ул., 6"
+  )
+
   fun getRandomSemesterNumber() = (1 until 8).random()
   fun getRandomHours() = (0 until 40).random()
   fun getRandomScore() = (0 until 100).random()
