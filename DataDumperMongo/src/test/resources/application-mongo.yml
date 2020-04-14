@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@127.0.0.1:27017
+      database: st_and_db_mongo_database
+
+
+# USE db.<collection name or actually java class name>.find(), LUKE!

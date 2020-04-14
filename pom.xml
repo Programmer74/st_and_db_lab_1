@@ -10,6 +10,7 @@
         <module>DataGenerator</module>
         <module>DataGeneratorMongo</module>
         <module>DataDumper</module>
+        <module>DataDumperMongo</module>
     </modules>
 
     <parent>
