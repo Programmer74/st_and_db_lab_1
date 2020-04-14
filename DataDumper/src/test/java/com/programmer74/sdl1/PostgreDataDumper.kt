@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
 @SpringBootApplication
-open class PostgreDataGenerator {
+open class PostgreDataDumper {
   companion object : KLogging() {
     @JvmStatic
     fun main(args: Array<String>) {
       SpringApplicationBuilder()
-          .sources(DataGeneratorApplication::class.java)
+          .sources(DataDumperApplication::class.java)
           .profiles("postgre")
           .build()
           .run(*args)

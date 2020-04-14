@@ -10,7 +10,7 @@ open class MysqlDataGenerator {
     @JvmStatic
     fun main(args: Array<String>) {
       SpringApplicationBuilder()
-          .sources(StoragesAndDatabasesLab1Application::class.java)
+          .sources(DataGeneratorApplication::class.java)
           .profiles("mysql")
           .build()
           .run(*args)

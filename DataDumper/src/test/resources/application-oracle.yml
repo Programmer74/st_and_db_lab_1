@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: c##admin
+    password: admin
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:migrations/oracle
+    enabled: true
+    baseline-on-migrate: true
+
+# DONT FORGET TO
+#  create user c##admin identified by admin;
+# IN SQL PLUS CONSOLE
+
+
+# select table_name from user_tables;
+# drop table "flyway_schema_history";
+
+# IF FLYWAY IGNORES THE SQL FILE, RUN IT MANUALLY. SORRY.

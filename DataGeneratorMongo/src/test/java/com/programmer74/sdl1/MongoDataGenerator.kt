@@ -18,7 +18,7 @@ open class MongoDataGenerator {
     @JvmStatic
     fun main(args: Array<String>) {
       SpringApplicationBuilder()
-          .sources(StoragesAndDatabasesLab1Application::class.java)
+          .sources(DataGeneratorApplication::class.java)
           .profiles("mongo")
           .build()
           .run(*args)

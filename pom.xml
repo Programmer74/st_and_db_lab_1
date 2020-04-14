@@ -9,6 +9,7 @@
         <module>Entities</module>
         <module>DataGenerator</module>
         <module>DataGeneratorMongo</module>
+        <module>DataDumper</module>
     </modules>
 
     <parent>

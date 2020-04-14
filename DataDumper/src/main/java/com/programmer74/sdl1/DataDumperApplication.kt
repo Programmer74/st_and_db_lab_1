@@ -5,11 +5,11 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-open class StoragesAndDatabasesLab1Application {
+open class DataDumperApplication {
   companion object : KLogging() {
     @JvmStatic
     fun main(args: Array<String>) {
-      SpringApplication.run(StoragesAndDatabasesLab1Application::class.java, *args)
+      SpringApplication.run(DataDumperApplication::class.java, *args)
     }
   }
 }
