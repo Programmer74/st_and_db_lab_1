@@ -11,6 +11,7 @@
         <module>DataGeneratorMongo</module>
         <module>DataDumper</module>
         <module>DataDumperMongo</module>
+        <module>DataLoaderOracle</module>
     </modules>
 
     <parent>
