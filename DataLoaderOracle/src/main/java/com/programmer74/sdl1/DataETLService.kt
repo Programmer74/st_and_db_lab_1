@@ -4,10 +4,17 @@ import com.programmer74.sdl1.dataretrieve.MongoDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.MysqlDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.OracleDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.PostgreDumpedDataRetriever
+import com.programmer74.sdl1.dtos.AssessmentDtoFromOracle
+import com.programmer74.sdl1.dtos.AssessmentDtoFromPostgre
 import com.programmer74.sdl1.dtos.PersonDtoFromMysql
 import com.programmer74.sdl1.dtos.PersonDtoFromOracle
+import com.programmer74.sdl1.entities.MergedAssessment
 import com.programmer74.sdl1.entities.MergedPerson
+import com.programmer74.sdl1.repositories.MergedAssessmentRepository
+import com.programmer74.sdl1.repositories.MergedPersonRepository
+import mu.KLogging
 import org.springframework.stereotype.Service
+import java.lang.Integer.max
 import java.time.Instant
 import javax.annotation.PostConstruct
 
@@ -16,10 +23,15 @@ class DataETLService(
   private val mongoRetriever: MongoDumpedDataRetriever,
   private val mysqlRetriever: MysqlDumpedDataRetriever,
   private val oracleRetriever: OracleDumpedDataRetriever,
-  private val postgreRetriever: PostgreDumpedDataRetriever
+  private val postgreRetriever: PostgreDumpedDataRetriever,
+
+  private val mergedPersonRepository: MergedPersonRepository,
+  private val mergedAssessmentRepository: MergedAssessmentRepository
 ) {
 
   lateinit var mergedPersons: List<MergedPerson>
+
+  lateinit var mergedAssessments: List<MergedAssessment>
 
   @PostConstruct
   fun start() {
@@ -28,9 +40,28 @@ class DataETLService(
   }
 
   private fun retrieveData() {
-    val oraclePersons = oracleRetriever.getOraclePersons()
-    val mysqlPerson = mysqlRetriever.getMysqlPersons()
-    mergedPersons = mergePersons(oraclePersons, mysqlPerson)
+    if (mergedPersonRepository.findAll().isEmpty()) {
+      logger.warn { "Merging and dumping mergedPersons to db" }
+      val oraclePersons = oracleRetriever.getOraclePersons()
+      val mysqlPerson = mysqlRetriever.getMysqlPersons()
+      mergedPersons = mergePersons(oraclePersons, mysqlPerson)
+      mergedPersons.forEach { mergedPersonRepository.saveAndFlush(it) }
+    } else {
+      logger.warn { "Already dumped mergedPersons to db" }
+    }
+    mergedPersons = mergedPersonRepository.findAll()
+
+    if (mergedAssessmentRepository.findAll().isEmpty()) {
+      logger.warn { "Merging and dumping mergedPersons to db" }
+      val oracleAssessments = oracleRetriever.getOracleAssessments()
+      val postgreAssessments = postgreRetriever.getPostgreAssessments()
+      mergedAssessments = mergeAssessments(oracleAssessments, postgreAssessments)
+      //      mergedAssessments.forEach { mergedAssessmentRepository.saveAndFlush(it) }
+    } else {
+      logger.warn { "Already dumped mergedPersons to db" }
+    }
+    //    mergedAssessments = mergedAssessmentRepository.findAll()
+    val o = 1
   }
 
   private fun mergePersons(
@@ -90,4 +121,76 @@ class DataETLService(
         { it.name }
     )
   }
+
+  private fun personByOracleId(id: Int) =
+      mergedPersons.firstOrNull { it.idFromOracle != null && it.idFromOracle == id }
+
+  private fun personByMysqlId(id: Int) =
+      mergedPersons.firstOrNull { it.idFromMysql != null && it.idFromMysql == id }
+
+  private fun personByName(name: String) =
+      mergedPersons.firstOrNull { it.name == name }
+
+  private fun mergeAssessments(
+    oracleAssessments: List<AssessmentDtoFromOracle>,
+    postgreAssessments: List<AssessmentDtoFromPostgre>
+  ): List<MergedAssessment> {
+
+    return mergeCollections(
+        oracleAssessments,
+        postgreAssessments,
+        { oracle, postgre ->
+          val person = personByOracleId(oracle.achievedByIdFromOracle)
+          (oracle.achievedAt == postgre.date) &&
+              (person != null) &&
+              (person.name == postgre.studentName)
+        }, //TODO: FIX DISCIPLINES
+        {
+          val person = personByOracleId(it.achievedByIdFromOracle)
+          MergedAssessment(
+              -1,
+              null,
+              it.mark,
+              it.markLetter,
+              Instant.ofEpochMilli(it.achievedAt),
+              null,
+              null,
+              person?.name,
+              person?.sid,
+              person?.id
+          )
+        },
+        { ora, ps ->
+          MergedAssessment(
+              -1,
+              ps.disciplineIdFromPostgre,
+              max(ps.score, ora.mark),
+              ora.markLetter,
+              Instant.ofEpochMilli(ps.date),
+              ps.teacherName,
+              null,
+              ps.studentName,
+              null,
+              personByName(ps.studentName)?.id
+          )
+        },
+        { ps ->
+          MergedAssessment(
+              -1,
+              ps.disciplineIdFromPostgre,
+              ps.score,
+              null,
+              Instant.ofEpochMilli(ps.date),
+              ps.teacherName,
+              null,
+              ps.studentName,
+              null,
+              personByName(ps.studentName)?.id
+          )
+        },
+        { "${it.achievedAt} ${it.studentName} ${it.mark}" }
+    )
+  }
+
+  companion object : KLogging()
 }
