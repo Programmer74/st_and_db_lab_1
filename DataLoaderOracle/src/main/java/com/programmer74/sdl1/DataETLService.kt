@@ -32,11 +32,11 @@ class DataETLService(
   private val disciplineRepository: DisciplineRepository
 ) {
 
-  lateinit var mergedPersons: List<MergedPerson>
+  lateinit var mergedPersons: MutableList<MergedPerson>
 
-  lateinit var mergedAssessments: List<MergedAssessment>
+  lateinit var mergedAssessments: MutableList<MergedAssessment>
 
-  lateinit var disciplines: List<Discipline>
+  lateinit var disciplines: MutableList<Discipline>
 
   @PostConstruct
   fun start() {
@@ -49,7 +49,7 @@ class DataETLService(
       logger.warn { "Merging and dumping mergedPersons to db" }
       val oraclePersons = oracleRetriever.getOraclePersons()
       val mysqlPerson = mysqlRetriever.getMysqlPersons()
-      mergedPersons = mergePersons(oraclePersons, mysqlPerson)
+      mergedPersons = mergePersons(oraclePersons, mysqlPerson).toMutableList()
       mergedPersons.forEach { mergedPersonRepository.saveAndFlush(it) }
     } else {
       logger.warn { "Already dumped mergedPersons to db" }
@@ -63,15 +63,15 @@ class DataETLService(
     disciplines = disciplineRepository.findAll()
 
     if (mergedAssessmentRepository.findAll().isEmpty()) {
-      logger.warn { "Merging and dumping mergedPersons to db" }
+      logger.warn { "Merging and dumping mergedAssessments to db" }
       val oracleAssessments = oracleRetriever.getOracleAssessments()
       val postgreAssessments = postgreRetriever.getPostgreAssessments()
-      mergedAssessments = mergeAssessments(oracleAssessments, postgreAssessments)
-      //      mergedAssessments.forEach { mergedAssessmentRepository.saveAndFlush(it) }
+      mergedAssessments = mergeAssessments(oracleAssessments, postgreAssessments).toMutableList()
+      mergedAssessments.forEach { mergedAssessmentRepository.saveAndFlush(it) }
     } else {
-      logger.warn { "Already dumped mergedPersons to db" }
+      logger.warn { "Already dumped mergedAssessments to db" }
     }
-    //    mergedAssessments = mergedAssessmentRepository.findAll()
+    mergedAssessments = mergedAssessmentRepository.findAll()
     val o = 1
   }
 
@@ -90,7 +90,8 @@ class DataETLService(
           it.lectionHours,
           it.practiceHours,
           it.labHours,
-          it.isExam)
+          it.isExam,
+          it.id)
     }.forEach { disciplineRepository.saveAndFlush(it) }
   }
 
@@ -161,6 +162,18 @@ class DataETLService(
   private fun personByName(name: String) =
       mergedPersons.firstOrNull { it.name == name }
 
+  private fun getOrAddDisciplineByName(name: String): Discipline {
+    val existingDiscipline = disciplines.firstOrNull { it.disciplineName == name }
+    if (existingDiscipline != null) return existingDiscipline
+    val newDiscipline = Discipline(id = null, disciplineName = name)
+    val addedDiscipline = disciplineRepository.saveAndFlush(newDiscipline)
+    disciplines.add(addedDiscipline)
+    return addedDiscipline
+  }
+
+  private fun disciplineByPostgresId(id: Int) =
+      disciplines.first { it.disciplineIdFromPostgre == id }
+
   private fun mergeAssessments(
     oracleAssessments: List<AssessmentDtoFromOracle>,
     postgreAssessments: List<AssessmentDtoFromPostgre>
@@ -174,12 +187,12 @@ class DataETLService(
           (oracle.achievedAt == postgre.date) &&
               (person != null) &&
               (person.name == postgre.studentName)
-        }, //TODO: FIX DISCIPLINES
+        },
         {
           val person = personByOracleId(it.achievedByIdFromOracle)
           MergedAssessment(
               -1,
-              null,
+              getOrAddDisciplineByName(it.disciplineName).id!!,
               it.mark,
               it.markLetter,
               Instant.ofEpochMilli(it.achievedAt),
@@ -193,7 +206,7 @@ class DataETLService(
         { ora, ps ->
           MergedAssessment(
               -1,
-              ps.disciplineIdFromPostgre,
+              disciplineByPostgresId(ps.disciplineIdFromPostgre).id!!,
               max(ps.score, ora.mark),
               ora.markLetter,
               Instant.ofEpochMilli(ps.date),
@@ -207,7 +220,7 @@ class DataETLService(
         { ps ->
           MergedAssessment(
               -1,
-              ps.disciplineIdFromPostgre,
+              disciplineByPostgresId(ps.disciplineIdFromPostgre).id!!,
               ps.score,
               null,
               Instant.ofEpochMilli(ps.date),

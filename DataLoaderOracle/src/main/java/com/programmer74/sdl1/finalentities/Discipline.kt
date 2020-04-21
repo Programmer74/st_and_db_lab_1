@@ -12,35 +12,38 @@ data class Discipline(
   val id: Int?,
 
   @Column
-  val universityName: String,
+  val universityName: String? = null,
 
   @Column
-  val studyStandard: String,
+  val studyStandard: String? = null,
 
   @Column
-  val disciplineName: String,
+  val disciplineName: String? = null,
 
   @Column
-  val studyForm: String,
+  val studyForm: String? = null,
 
   @Column
-  val faculty: String,
+  val faculty: String? = null,
 
   @Column
-  val speciality: String,
+  val speciality: String? = null,
 
   @Column
-  val semester: Int,
+  val semester: Int? = null,
 
   @Column
-  val lectionHours: Int,
+  val lectionHours: Int? = null,
 
   @Column
-  val practiceHours: Int,
+  val practiceHours: Int? = null,
 
   @Column
-  val labHours: Int,
+  val labHours: Int? = null,
 
   @Column
-  val isExam: Boolean
+  val isExam: Boolean? = null,
+
+  @Column
+  val disciplineIdFromPostgre: Int? = null
 )
