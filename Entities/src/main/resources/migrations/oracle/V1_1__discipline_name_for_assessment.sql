@@ -1,0 +1,1 @@
+ALTER TABLE assessment ADD discipline_name VARCHAR2(255) DEFAULT 'dummy' NOT NULL;

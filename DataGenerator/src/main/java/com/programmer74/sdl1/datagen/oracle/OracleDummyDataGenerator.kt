@@ -119,7 +119,8 @@ class OracleDummyDataGenerator(
           mark = 91,
           markLetter = "A",
           achievedAt = Instant.now(),
-          achievedBy = person
+          achievedBy = person,
+          disciplineName = UniversityGenerator.disciplineNames.random()
       ))
 
   companion object : KLogging()

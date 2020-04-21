@@ -92,7 +92,8 @@ class OracleDummyDataDumper(
       mark,
       markLetter,
       achievedAt.toEpochMilli(),
-      achievedBy.id!!)
+      achievedBy.id!!,
+      disciplineName)
 
   companion object : KLogging()
 }

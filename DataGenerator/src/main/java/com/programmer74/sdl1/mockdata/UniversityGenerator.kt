@@ -12,7 +12,7 @@ object UniversityGenerator {
   )
 
   val disciplineNames = listOf(
-      "Компьютерная графика (2018449043-И)"
+      "Компьютерная графика (2018449043-И)", "Технологии веб-сервисов", "Системное и прикладное ПО"
   )
 
   val studyFormNames = listOf(

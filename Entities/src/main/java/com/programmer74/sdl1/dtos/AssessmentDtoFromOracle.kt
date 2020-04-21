@@ -6,5 +6,6 @@ data class AssessmentDtoFromOracle(
   var mark: Int,
   var markLetter: String,
   var achievedAt: Long,
-  var achievedByIdFromOracle: Int
+  var achievedByIdFromOracle: Int,
+  var disciplineName: String
 )

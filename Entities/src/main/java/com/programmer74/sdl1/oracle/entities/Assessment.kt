@@ -26,5 +26,8 @@ data class Assessment(
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "achieved_by", nullable = false)
-  val achievedBy: Person
+  val achievedBy: Person,
+
+  @Column(nullable = false)
+  val disciplineName: String
 )
