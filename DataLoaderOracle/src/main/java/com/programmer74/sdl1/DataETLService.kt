@@ -8,10 +8,12 @@ import com.programmer74.sdl1.dtos.AssessmentDtoFromOracle
 import com.programmer74.sdl1.dtos.AssessmentDtoFromPostgre
 import com.programmer74.sdl1.dtos.PersonDtoFromMysql
 import com.programmer74.sdl1.dtos.PersonDtoFromOracle
-import com.programmer74.sdl1.entities.MergedAssessment
-import com.programmer74.sdl1.entities.MergedPerson
-import com.programmer74.sdl1.repositories.MergedAssessmentRepository
-import com.programmer74.sdl1.repositories.MergedPersonRepository
+import com.programmer74.sdl1.finalentities.Discipline
+import com.programmer74.sdl1.finalentities.MergedAssessment
+import com.programmer74.sdl1.finalentities.MergedPerson
+import com.programmer74.sdl1.finalrepositories.DisciplineRepository
+import com.programmer74.sdl1.finalrepositories.MergedAssessmentRepository
+import com.programmer74.sdl1.finalrepositories.MergedPersonRepository
 import mu.KLogging
 import org.springframework.stereotype.Service
 import java.lang.Integer.max
@@ -26,12 +28,15 @@ class DataETLService(
   private val postgreRetriever: PostgreDumpedDataRetriever,
 
   private val mergedPersonRepository: MergedPersonRepository,
-  private val mergedAssessmentRepository: MergedAssessmentRepository
+  private val mergedAssessmentRepository: MergedAssessmentRepository,
+  private val disciplineRepository: DisciplineRepository
 ) {
 
   lateinit var mergedPersons: List<MergedPerson>
 
   lateinit var mergedAssessments: List<MergedAssessment>
+
+  lateinit var disciplines: List<Discipline>
 
   @PostConstruct
   fun start() {
@@ -51,6 +56,12 @@ class DataETLService(
     }
     mergedPersons = mergedPersonRepository.findAll()
 
+    if (disciplineRepository.findAll().isEmpty()) {
+      logger.warn { "Loading disciplineRepository to db" }
+      loadDisciplines()
+    }
+    disciplines = disciplineRepository.findAll()
+
     if (mergedAssessmentRepository.findAll().isEmpty()) {
       logger.warn { "Merging and dumping mergedPersons to db" }
       val oracleAssessments = oracleRetriever.getOracleAssessments()
@@ -62,6 +73,25 @@ class DataETLService(
     }
     //    mergedAssessments = mergedAssessmentRepository.findAll()
     val o = 1
+  }
+
+  private fun loadDisciplines() {
+    val disciplinesFromPostgre = postgreRetriever.getPostgreDisciplines()
+    disciplinesFromPostgre.map {
+      Discipline(
+          it.id,
+          it.universityName,
+          it.studyStandard,
+          it.disciplineName,
+          it.studyForm,
+          it.faculty,
+          it.speciality,
+          it.semester,
+          it.lectionHours,
+          it.practiceHours,
+          it.labHours,
+          it.isExam)
+    }.forEach { disciplineRepository.saveAndFlush(it) }
   }
 
   private fun mergePersons(

@@ -1,4 +1,4 @@
-package com.programmer74.sdl1.entities
+package com.programmer74.sdl1.finalentities
 
 import java.time.Instant
 import javax.persistence.*
