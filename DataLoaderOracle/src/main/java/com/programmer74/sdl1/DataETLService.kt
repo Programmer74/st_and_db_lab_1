@@ -4,15 +4,12 @@ import com.programmer74.sdl1.dataretrieve.MongoDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.MysqlDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.OracleDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.PostgreDumpedDataRetriever
-import com.programmer74.sdl1.dtos.*
-import com.programmer74.sdl1.finalentities.Discipline
-import com.programmer74.sdl1.finalentities.LessonEntry
-import com.programmer74.sdl1.finalentities.MergedAssessment
-import com.programmer74.sdl1.finalentities.MergedPerson
-import com.programmer74.sdl1.finalrepositories.DisciplineRepository
-import com.programmer74.sdl1.finalrepositories.LessonEntryRepository
-import com.programmer74.sdl1.finalrepositories.MergedAssessmentRepository
-import com.programmer74.sdl1.finalrepositories.MergedPersonRepository
+import com.programmer74.sdl1.dtos.AssessmentDtoFromOracle
+import com.programmer74.sdl1.dtos.AssessmentDtoFromPostgre
+import com.programmer74.sdl1.dtos.PersonDtoFromMysql
+import com.programmer74.sdl1.dtos.PersonDtoFromOracle
+import com.programmer74.sdl1.finalentities.*
+import com.programmer74.sdl1.finalrepositories.*
 import mu.KLogging
 import org.springframework.stereotype.Service
 import java.lang.Integer.max
@@ -29,21 +26,24 @@ class DataETLService(
   private val mergedPersonRepository: MergedPersonRepository,
   private val mergedAssessmentRepository: MergedAssessmentRepository,
   private val disciplineRepository: DisciplineRepository,
-  private val lessonEntryRepository: LessonEntryRepository
+  private val lessonEntryRepository: LessonEntryRepository,
+  private val studyGroupRepository: StudyGroupRepository
 ) {
 
-  //oracle:  Assessment, Person     - 2/4
-  //postgre: Assessment, Discipline - 2/2 - OK
-  //mysql:   Person - 1/5
-  //mongo - 0/4
+  //oracle:  Assessment, Person, LessonEntry, StudyGroup - 4/4 - OK
+  //postgre: Assessment, Discipline                      - 2/2 - OK
+  //mysql:   Person                                      - 1/5
+  //mongo                                                - 0/4
 
-  lateinit var mergedPersons: List<MergedPerson>
+  lateinit var mergedPersons: MutableList<MergedPerson>
 
   lateinit var mergedAssessments: List<MergedAssessment>
 
   lateinit var disciplines: MutableList<Discipline>
 
   lateinit var lessonEntries: List<LessonEntry>
+
+  lateinit var studyGroups: List<StudyGroup>
 
   @PostConstruct
   fun start() {
@@ -63,12 +63,24 @@ class DataETLService(
     }
     mergedPersons = mergedPersonRepository.findAll()
 
-    disciplines = getOrLoadCollection("disciplines",
+    disciplines = getOrLoadCollection(
+        "disciplines",
         postgreRetriever.getPostgreDisciplines(),
-        disciplineRepository) { it.toDiscipline() }
-    lessonEntries = getOrLoadCollection("lesson entries",
+        disciplineRepository, { it.toDiscipline() })
+    lessonEntries = getOrLoadCollection(
+        "lesson entries",
         oracleRetriever.getOracleLessonEntries(),
-        lessonEntryRepository) { it.toLessonEntry() }
+        lessonEntryRepository, { it.toLessonEntry() })
+    studyGroups = getOrLoadCollection(
+        "study groups",
+        oracleRetriever.getOracleStudyGroups(),
+        studyGroupRepository, {
+      StudyGroup(
+          it.id, it.name, it.studyForm, it.school, it.speciality, it.qualification, it.studyYear,
+          it.lessonsEntryIdsFromOracle.map { lessonEntryById(it) }.toMutableList(),
+          it.participantsIdsFromOracle.map { getOrAddPersonByOracleId(it) }.toMutableList()
+      )
+    })
 
     if (mergedAssessmentRepository.findAll().isEmpty()) {
       logger.warn { "Merging and dumping mergedAssessments to db" }
@@ -83,6 +95,47 @@ class DataETLService(
     val o = 1
   }
 
+  private fun personByOracleId(id: Int) =
+      mergedPersons.firstOrNull { it.idFromOracle != null && it.idFromOracle == id }
+
+  private fun personByMysqlId(id: Int) =
+      mergedPersons.first { it.idFromMysql != null && it.idFromMysql == id }
+
+  private fun personByName(name: String) =
+      mergedPersons.firstOrNull { it.name == name }
+
+  private fun disciplineByPostgresId(id: Int) =
+      disciplines.first { it.disciplineIdFromPostgre == id }
+
+  private fun lessonEntryById(id: Int) = lessonEntries.first { it.id == id }
+
+  private fun getOrAddPersonByOracleId(id: Int): MergedPerson {
+    val ans = mergedPersons.firstOrNull { it.idFromOracle != null && it.idFromOracle == id }
+    if (ans != null) return ans
+    logger.error { "Unable to find person by oracle id $id; trying search in filedump" }
+    val ans2 = oracleRetriever.getOraclePersons().firstOrNull { it.id == id }
+      ?: error("Unable to find person by oracle id $id in both DB and FILEDUMP")
+    val ans3 = personByName(ans2.name)
+    if (ans3 != null) return ans3
+    logger.error {
+      "Found person by oracle id $id but its name ${ans2.name} is unknown; " +
+          "adding new person for such name"
+    }
+    val newPerson = ans2.toNewMergedPerson()
+    val savedPerson = mergedPersonRepository.saveAndFlush(newPerson)
+    mergedPersons.add(savedPerson)
+    return savedPerson
+  }
+
+  private fun getOrAddDisciplineByName(name: String): Discipline {
+    val existingDiscipline = disciplines.firstOrNull { it.disciplineName == name }
+    if (existingDiscipline != null) return existingDiscipline
+    val newDiscipline = Discipline(id = null, disciplineName = name)
+    val addedDiscipline = disciplineRepository.saveAndFlush(newDiscipline)
+    disciplines.add(addedDiscipline)
+    return addedDiscipline
+  }
+
   private fun mergePersons(
     oraclePersons: List<PersonDtoFromOracle>,
     mysqlPersons: List<PersonDtoFromMysql>
@@ -93,19 +146,7 @@ class DataETLService(
         mysqlPersons,
         { oracle, mysql -> oracle.name == mysql.name },
         {
-          MergedPerson(
-              -1,
-              it.sid,
-              it.name,
-              Instant.ofEpochMilli(it.birthDate),
-              it.birthPlace,
-              it.faculty,
-              it.position,
-              it.isContractStudent,
-              Instant.ofEpochMilli(it.contractFrom),
-              Instant.ofEpochMilli(it.contractTo),
-              it.id,
-              null)
+          it.toNewMergedPerson()
         },
         { it, mysql ->
           MergedPerson(
@@ -140,27 +181,6 @@ class DataETLService(
         { it.name }
     )
   }
-
-  private fun personByOracleId(id: Int) =
-      mergedPersons.firstOrNull { it.idFromOracle != null && it.idFromOracle == id }
-
-  private fun personByMysqlId(id: Int) =
-      mergedPersons.firstOrNull { it.idFromMysql != null && it.idFromMysql == id }
-
-  private fun personByName(name: String) =
-      mergedPersons.firstOrNull { it.name == name }
-
-  private fun getOrAddDisciplineByName(name: String): Discipline {
-    val existingDiscipline = disciplines.firstOrNull { it.disciplineName == name }
-    if (existingDiscipline != null) return existingDiscipline
-    val newDiscipline = Discipline(id = null, disciplineName = name)
-    val addedDiscipline = disciplineRepository.saveAndFlush(newDiscipline)
-    disciplines.add(addedDiscipline)
-    return addedDiscipline
-  }
-
-  private fun disciplineByPostgresId(id: Int) =
-      disciplines.first { it.disciplineIdFromPostgre == id }
 
   private fun mergeAssessments(
     oracleAssessments: List<AssessmentDtoFromOracle>,

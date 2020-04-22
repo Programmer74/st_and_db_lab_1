@@ -57,16 +57,18 @@ fun <A, B> getOrLoadCollection(
   name: String,
   sourceCollection: List<A>,
   destinationRepository: JpaRepository<B, Int>,
-  constructor: (A) -> B
+  constructor: (A) -> B,
+    dryRun: Boolean = false
 ): MutableList<B> {
   if (destinationRepository.findAll().isNotEmpty()) {
     DataMergerExtensions.logger.warn { "Repository $name is already dumped" }
   } else {
     DataMergerExtensions.logger.warn { "Dumping $name" }
+    if (dryRun) DataMergerExtensions.logger.warn { "DRY RUN, NO CHANGES TO DB WILL BE APPLIED" }
     sourceCollection.map {
       constructor.invoke(it)
     }.forEach {
-      destinationRepository.saveAndFlush(it)
+      if (!dryRun) destinationRepository.saveAndFlush(it)
     }
   }
   return destinationRepository.findAll().toMutableList()

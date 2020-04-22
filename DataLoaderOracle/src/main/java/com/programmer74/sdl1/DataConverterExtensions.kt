@@ -2,8 +2,11 @@ package com.programmer74.sdl1
 
 import com.programmer74.sdl1.dtos.DisciplineDto
 import com.programmer74.sdl1.dtos.LessonEntryDto
+import com.programmer74.sdl1.dtos.PersonDtoFromOracle
 import com.programmer74.sdl1.finalentities.Discipline
 import com.programmer74.sdl1.finalentities.LessonEntry
+import com.programmer74.sdl1.finalentities.MergedPerson
+import java.time.Instant
 
 fun DisciplineDto.toDiscipline() = Discipline(
     this.id,
@@ -23,3 +26,17 @@ fun DisciplineDto.toDiscipline() = Discipline(
 fun LessonEntryDto.toLessonEntry() = LessonEntry(
     this.id, this.name, this.teacherIdFromOracle, this.weekday, this.hour, this.minute, this.room
 )
+
+fun PersonDtoFromOracle.toNewMergedPerson() = MergedPerson(
+    -1,
+    this.sid,
+    this.name,
+    Instant.ofEpochMilli(this.birthDate),
+    this.birthPlace,
+    this.faculty,
+    this.position,
+    this.isContractStudent,
+    Instant.ofEpochMilli(this.contractFrom),
+    Instant.ofEpochMilli(this.contractTo),
+    this.id,
+    null)
