@@ -4,14 +4,13 @@ import com.programmer74.sdl1.dataretrieve.MongoDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.MysqlDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.OracleDumpedDataRetriever
 import com.programmer74.sdl1.dataretrieve.PostgreDumpedDataRetriever
-import com.programmer74.sdl1.dtos.AssessmentDtoFromOracle
-import com.programmer74.sdl1.dtos.AssessmentDtoFromPostgre
-import com.programmer74.sdl1.dtos.PersonDtoFromMysql
-import com.programmer74.sdl1.dtos.PersonDtoFromOracle
+import com.programmer74.sdl1.dtos.*
 import com.programmer74.sdl1.finalentities.Discipline
+import com.programmer74.sdl1.finalentities.LessonEntry
 import com.programmer74.sdl1.finalentities.MergedAssessment
 import com.programmer74.sdl1.finalentities.MergedPerson
 import com.programmer74.sdl1.finalrepositories.DisciplineRepository
+import com.programmer74.sdl1.finalrepositories.LessonEntryRepository
 import com.programmer74.sdl1.finalrepositories.MergedAssessmentRepository
 import com.programmer74.sdl1.finalrepositories.MergedPersonRepository
 import mu.KLogging
@@ -29,14 +28,22 @@ class DataETLService(
 
   private val mergedPersonRepository: MergedPersonRepository,
   private val mergedAssessmentRepository: MergedAssessmentRepository,
-  private val disciplineRepository: DisciplineRepository
+  private val disciplineRepository: DisciplineRepository,
+  private val lessonEntryRepository: LessonEntryRepository
 ) {
 
-  lateinit var mergedPersons: MutableList<MergedPerson>
+  //oracle:  Assessment, Person     - 2/4
+  //postgre: Assessment, Discipline - 2/2 - OK
+  //mysql:   Person - 1/5
+  //mongo - 0/4
 
-  lateinit var mergedAssessments: MutableList<MergedAssessment>
+  lateinit var mergedPersons: List<MergedPerson>
+
+  lateinit var mergedAssessments: List<MergedAssessment>
 
   lateinit var disciplines: MutableList<Discipline>
+
+  lateinit var lessonEntries: List<LessonEntry>
 
   @PostConstruct
   fun start() {
@@ -56,11 +63,12 @@ class DataETLService(
     }
     mergedPersons = mergedPersonRepository.findAll()
 
-    if (disciplineRepository.findAll().isEmpty()) {
-      logger.warn { "Loading disciplineRepository to db" }
-      loadDisciplines()
-    }
-    disciplines = disciplineRepository.findAll()
+    disciplines = getOrLoadCollection("disciplines",
+        postgreRetriever.getPostgreDisciplines(),
+        disciplineRepository) { it.toDiscipline() }
+    lessonEntries = getOrLoadCollection("lesson entries",
+        oracleRetriever.getOracleLessonEntries(),
+        lessonEntryRepository) { it.toLessonEntry() }
 
     if (mergedAssessmentRepository.findAll().isEmpty()) {
       logger.warn { "Merging and dumping mergedAssessments to db" }
@@ -73,26 +81,6 @@ class DataETLService(
     }
     mergedAssessments = mergedAssessmentRepository.findAll()
     val o = 1
-  }
-
-  private fun loadDisciplines() {
-    val disciplinesFromPostgre = postgreRetriever.getPostgreDisciplines()
-    disciplinesFromPostgre.map {
-      Discipline(
-          it.id,
-          it.universityName,
-          it.studyStandard,
-          it.disciplineName,
-          it.studyForm,
-          it.faculty,
-          it.speciality,
-          it.semester,
-          it.lectionHours,
-          it.practiceHours,
-          it.labHours,
-          it.isExam,
-          it.id)
-    }.forEach { disciplineRepository.saveAndFlush(it) }
   }
 
   private fun mergePersons(

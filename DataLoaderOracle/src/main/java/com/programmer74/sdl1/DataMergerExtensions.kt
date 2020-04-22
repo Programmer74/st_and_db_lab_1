@@ -1,6 +1,7 @@
 package com.programmer74.sdl1
 
 import mu.KLogging
+import org.springframework.data.jpa.repository.JpaRepository
 
 object DataMergerExtensions : KLogging()
 
@@ -50,4 +51,23 @@ fun <A, B, C> mergeCollections(
   }
 
   return uniqueResult
+}
+
+fun <A, B> getOrLoadCollection(
+  name: String,
+  sourceCollection: List<A>,
+  destinationRepository: JpaRepository<B, Int>,
+  constructor: (A) -> B
+): MutableList<B> {
+  if (destinationRepository.findAll().isNotEmpty()) {
+    DataMergerExtensions.logger.warn { "Repository $name is already dumped" }
+  } else {
+    DataMergerExtensions.logger.warn { "Dumping $name" }
+    sourceCollection.map {
+      constructor.invoke(it)
+    }.forEach {
+      destinationRepository.saveAndFlush(it)
+    }
+  }
+  return destinationRepository.findAll().toMutableList()
 }
