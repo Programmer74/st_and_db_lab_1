@@ -12,8 +12,9 @@ data class MergedAssessment(
   @Column(nullable = false)
   var id: Int?,
 
-  @Column
-  var disciplineId: Int?,
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "discipline_id", nullable = false)
+  val discipline: Discipline,
 
   @Column
   var mark: Int?,
@@ -36,6 +37,7 @@ data class MergedAssessment(
   @Column
   var studentSid: String?,
 
-  @Column
-  var studentId: Int?
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "student_id", nullable = false)
+  val student: MergedPerson
 )

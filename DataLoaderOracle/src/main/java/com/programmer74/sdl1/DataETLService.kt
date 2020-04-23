@@ -389,7 +389,7 @@ class DataETLService(
           val person = personByOracleId(it.achievedByIdFromOracle)
           MergedAssessment(
               -1,
-              getOrAddDisciplineByName(it.disciplineName).id!!,
+              getOrAddDisciplineByName(it.disciplineName),
               it.mark,
               it.markLetter,
               Instant.ofEpochMilli(it.achievedAt),
@@ -397,13 +397,13 @@ class DataETLService(
               null,
               person?.name,
               person?.sid,
-              person?.id
+              person!!
           )
         },
         { ora, ps ->
           MergedAssessment(
               -1,
-              disciplineByPostgresId(ps.disciplineIdFromPostgre).id!!,
+              disciplineByPostgresId(ps.disciplineIdFromPostgre),
               max(ps.score, ora.mark),
               ora.markLetter,
               Instant.ofEpochMilli(ps.date),
@@ -411,13 +411,13 @@ class DataETLService(
               null,
               ps.studentName,
               null,
-              personByName(ps.studentName)?.id
+              personByName(ps.studentName)!!
           )
         },
         { ps ->
           MergedAssessment(
               -1,
-              disciplineByPostgresId(ps.disciplineIdFromPostgre).id!!,
+              disciplineByPostgresId(ps.disciplineIdFromPostgre),
               ps.score,
               null,
               Instant.ofEpochMilli(ps.date),
@@ -425,7 +425,7 @@ class DataETLService(
               null,
               ps.studentName,
               null,
-              personByName(ps.studentName)?.id
+              personByName(ps.studentName)!!
           )
         },
         { "${it.achievedAt} ${it.studentName} ${it.mark}" }
