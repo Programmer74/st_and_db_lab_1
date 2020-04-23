@@ -27,13 +27,17 @@ class DataETLService(
   private val mergedAssessmentRepository: MergedAssessmentRepository,
   private val disciplineRepository: DisciplineRepository,
   private val lessonEntryRepository: LessonEntryRepository,
-  private val studyGroupRepository: StudyGroupRepository
+  private val studyGroupRepository: StudyGroupRepository,
+  private val conferenceRepository: ConferenceRepository,
+  private val publicationRepository: PublicationRepository,
+  private val projectRepository: ProjectRepository,
+  private val bookTakenRepository: BookTakenRepository
 ) {
 
-  //oracle:  Assessment, Person, LessonEntry, StudyGroup - 4/4 - OK
-  //postgre: Assessment, Discipline                      - 2/2 - OK
-  //mysql:   Person                                      - 1/5
-  //mongo                                                - 0/4
+  //oracle:  Assessment, Person, LessonEntry, StudyGroup         - 4/4 - OK
+  //postgre: Assessment, Discipline                              - 2/2 - OK
+  //mysql:   Person, Conference, Publication, Project, BookTaken - 5/5 - OK
+  //mongo                                                        - 0/4
 
   lateinit var mergedPersons: MutableList<MergedPerson>
 
@@ -44,6 +48,14 @@ class DataETLService(
   lateinit var lessonEntries: List<LessonEntry>
 
   lateinit var studyGroups: List<StudyGroup>
+
+  lateinit var conferences: List<Conference>
+
+  lateinit var publications: List<Publication>
+
+  lateinit var projects: List<Project>
+
+  lateinit var booksTaken: List<BookTaken>
 
   @PostConstruct
   fun start() {
@@ -63,24 +75,9 @@ class DataETLService(
     }
     mergedPersons = mergedPersonRepository.findAll()
 
-    disciplines = getOrLoadCollection(
-        "disciplines",
-        postgreRetriever.getPostgreDisciplines(),
-        disciplineRepository, { it.toDiscipline() })
-    lessonEntries = getOrLoadCollection(
-        "lesson entries",
-        oracleRetriever.getOracleLessonEntries(),
-        lessonEntryRepository, { it.toLessonEntry() })
-    studyGroups = getOrLoadCollection(
-        "study groups",
-        oracleRetriever.getOracleStudyGroups(),
-        studyGroupRepository, {
-      StudyGroup(
-          it.id, it.name, it.studyForm, it.school, it.speciality, it.qualification, it.studyYear,
-          it.lessonsEntryIdsFromOracle.map { lessonEntryById(it) }.toMutableList(),
-          it.participantsIdsFromOracle.map { getOrAddPersonByOracleId(it) }.toMutableList()
-      )
-    })
+    loadSimplePostgreCollections()
+    loadSimpleOracleCollections()
+    loadSimpleMysqlCollections()
 
     if (mergedAssessmentRepository.findAll().isEmpty()) {
       logger.warn { "Merging and dumping mergedAssessments to db" }
@@ -95,11 +92,84 @@ class DataETLService(
     val o = 1
   }
 
+  private fun loadSimplePostgreCollections() {
+    disciplines = getOrLoadCollection(
+        "disciplines",
+        postgreRetriever.getPostgreDisciplines(),
+        disciplineRepository, { it.toDiscipline() })
+  }
+
+  private fun loadSimpleOracleCollections() {
+    lessonEntries = getOrLoadCollection(
+        "lesson entries",
+        oracleRetriever.getOracleLessonEntries(),
+        lessonEntryRepository, { it.toLessonEntry() })
+    studyGroups = getOrLoadCollection(
+        "study groups",
+        oracleRetriever.getOracleStudyGroups(),
+        studyGroupRepository, {
+      StudyGroup(
+          it.id, it.name, it.studyForm, it.school, it.speciality, it.qualification, it.studyYear,
+          it.lessonsEntryIdsFromOracle.map { lessonEntryById(it) }.toMutableList(),
+          it.participantsIdsFromOracle.map { getOrAddPersonByOracleId(it) }.toMutableList()
+      )
+    })
+  }
+
+  private fun loadSimpleMysqlCollections() {
+    conferences = getOrLoadCollection(
+        "conferences",
+        mysqlRetriever.getMysqlConferences(),
+        conferenceRepository, {
+      Conference(
+          it.id, it.name, it.place, Instant.ofEpochMilli(it.date),
+          it.participantsFromMysql.map { getOrAddPersonByMysqlId(it) }.toMutableList())
+    })
+    publications = getOrLoadCollection(
+        "publications",
+        mysqlRetriever.getMysqlPublications(),
+        publicationRepository, {
+      Publication(
+          it.id,
+          it.name,
+          it.type,
+          it.language,
+          it.source,
+          it.pages,
+          it.sourceType,
+          it.quoteIndex,
+          Instant.ofEpochMilli(it.date),
+          it.authorIDsFromMysql.map { getOrAddPersonByMysqlId(it) }.toMutableList())
+    })
+    projects = getOrLoadCollection(
+        "projects",
+        mysqlRetriever.getMysqlProjects(),
+        projectRepository, {
+      Project(
+          it.id,
+          it.name,
+          Instant.ofEpochMilli(it.dateFrom),
+          Instant.ofEpochMilli(it.dateTo),
+          it.workersFromMysql.map { getOrAddPersonByMysqlId(it) }.toMutableList())
+    })
+    booksTaken = getOrLoadCollection(
+        "books taken",
+        mysqlRetriever.getMysqlBooksTaken(),
+        bookTakenRepository, {
+      BookTaken(
+          it.id,
+          it.bookName,
+          getOrAddPersonByMysqlId(it.takenByIdFromMysql),
+          Instant.ofEpochMilli(it.takenAt),
+          Instant.ofEpochMilli(it.returnedAt))
+    })
+  }
+
   private fun personByOracleId(id: Int) =
       mergedPersons.firstOrNull { it.idFromOracle != null && it.idFromOracle == id }
 
   private fun personByMysqlId(id: Int) =
-      mergedPersons.first { it.idFromMysql != null && it.idFromMysql == id }
+      mergedPersons.firstOrNull { it.idFromMysql != null && it.idFromMysql == id }
 
   private fun personByName(name: String) =
       mergedPersons.firstOrNull { it.name == name }
@@ -110,7 +180,7 @@ class DataETLService(
   private fun lessonEntryById(id: Int) = lessonEntries.first { it.id == id }
 
   private fun getOrAddPersonByOracleId(id: Int): MergedPerson {
-    val ans = mergedPersons.firstOrNull { it.idFromOracle != null && it.idFromOracle == id }
+    val ans = personByOracleId(id)
     if (ans != null) return ans
     logger.error { "Unable to find person by oracle id $id; trying search in filedump" }
     val ans2 = oracleRetriever.getOraclePersons().firstOrNull { it.id == id }
@@ -119,6 +189,24 @@ class DataETLService(
     if (ans3 != null) return ans3
     logger.error {
       "Found person by oracle id $id but its name ${ans2.name} is unknown; " +
+          "adding new person for such name"
+    }
+    val newPerson = ans2.toNewMergedPerson()
+    val savedPerson = mergedPersonRepository.saveAndFlush(newPerson)
+    mergedPersons.add(savedPerson)
+    return savedPerson
+  }
+
+  private fun getOrAddPersonByMysqlId(id: Int): MergedPerson {
+    val ans = personByMysqlId(id)
+    if (ans != null) return ans
+    logger.error { "Unable to find person by mysql id $id; trying search in filedump" }
+    val ans2 = mysqlRetriever.getMysqlPersons().firstOrNull { it.id == id }
+      ?: error("Unable to find person by oracle id $id in both DB and FILEDUMP")
+    val ans3 = personByName(ans2.name)
+    if (ans3 != null) return ans3
+    logger.error {
+      "Found person by mysql id $id but its name ${ans2.name} is unknown; " +
           "adding new person for such name"
     }
     val newPerson = ans2.toNewMergedPerson()

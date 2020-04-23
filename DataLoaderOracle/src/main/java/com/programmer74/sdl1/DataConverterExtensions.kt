@@ -2,6 +2,7 @@ package com.programmer74.sdl1
 
 import com.programmer74.sdl1.dtos.DisciplineDto
 import com.programmer74.sdl1.dtos.LessonEntryDto
+import com.programmer74.sdl1.dtos.PersonDtoFromMysql
 import com.programmer74.sdl1.dtos.PersonDtoFromOracle
 import com.programmer74.sdl1.finalentities.Discipline
 import com.programmer74.sdl1.finalentities.LessonEntry
@@ -38,5 +39,19 @@ fun PersonDtoFromOracle.toNewMergedPerson() = MergedPerson(
     this.isContractStudent,
     Instant.ofEpochMilli(this.contractFrom),
     Instant.ofEpochMilli(this.contractTo),
+    this.id,
+    null)
+
+fun PersonDtoFromMysql.toNewMergedPerson() = MergedPerson(
+    -1,
+    null,
+    this.name,
+    null,
+    null,
+    null,
+    this.position,
+    null,
+    null,
+    null,
     this.id,
     null)

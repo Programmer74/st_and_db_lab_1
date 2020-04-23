@@ -1,10 +1,7 @@
 package com.programmer74.sdl1.dataretrieve
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.programmer74.sdl1.dtos.ConferenceDto
-import com.programmer74.sdl1.dtos.PersonDtoFromMysql
-import com.programmer74.sdl1.dtos.ProjectDto
-import com.programmer74.sdl1.dtos.PublicationDto
+import com.programmer74.sdl1.dtos.*
 import org.springframework.stereotype.Service
 import java.io.File
 
@@ -33,7 +30,7 @@ class MysqlDumpedDataRetriever {
     return mapper.readValue(content)
   }
 
-  fun getMysqlBooksTaken(): List<PublicationDto> {
+  fun getMysqlBooksTaken(): List<BookTakenDto> {
     val content = File(srcPath, "5__books_taken.json").readText()
     return mapper.readValue(content)
   }
