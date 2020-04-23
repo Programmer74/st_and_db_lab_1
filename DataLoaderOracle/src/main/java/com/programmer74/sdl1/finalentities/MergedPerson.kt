@@ -28,10 +28,13 @@ data class MergedPerson(
   var faculty: String?,
 
   @Column
-  var position: String,
+  var position: String?,
 
   @Column
   var isContractStudent: Boolean?,
+
+  @Column
+  var isBeneficiaryStudent: Boolean?,
 
   @Column
   var contractFrom: Instant?,

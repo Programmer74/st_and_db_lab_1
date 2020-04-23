@@ -58,7 +58,7 @@ fun <A, B> getOrLoadCollection(
   sourceCollection: List<A>,
   destinationRepository: JpaRepository<B, Int>,
   constructor: (A) -> B,
-    dryRun: Boolean = false
+  dryRun: Boolean = false
 ): MutableList<B> {
   if (destinationRepository.findAll().isNotEmpty()) {
     DataMergerExtensions.logger.warn { "Repository $name is already dumped" }
@@ -72,4 +72,29 @@ fun <A, B> getOrLoadCollection(
     }
   }
   return destinationRepository.findAll().toMutableList()
+}
+
+fun <A, B> getOrLoadCollectionExcludingDuplicates(
+  name: String,
+  sourceCollection: List<A>,
+  repository: JpaRepository<B, Int>,
+  constructor: (A) -> B,
+  comparator: (A, B) -> Boolean,
+  skipStepsOnNonEmptyTable: Boolean
+): MutableList<B> {
+  if (skipStepsOnNonEmptyTable && repository.findAll().isNotEmpty()) {
+    DataMergerExtensions.logger.warn { "Repository $name is already dumped" }
+  } else {
+    sourceCollection.map { sourceEntity ->
+      val existing = repository.findAll().filter { comparator.invoke(sourceEntity, it) }
+      if (existing.isNotEmpty()) {
+        existing.single()
+      } else {
+        val new = constructor.invoke(sourceEntity)
+        val saved = repository.saveAndFlush(new)
+        saved
+      }
+    }
+  }
+  return repository.findAll().toMutableList()
 }

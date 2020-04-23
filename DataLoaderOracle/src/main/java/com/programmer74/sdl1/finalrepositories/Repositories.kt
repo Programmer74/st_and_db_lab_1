@@ -14,3 +14,7 @@ interface ConferenceRepository : JpaRepository<Conference, Int>
 interface PublicationRepository : JpaRepository<Publication, Int>
 interface ProjectRepository : JpaRepository<Project, Int>
 interface BookTakenRepository : JpaRepository<BookTaken, Int>
+
+interface DormitoryRepository : JpaRepository<Dormitory, Int>
+interface DormitoryRoomRepository: JpaRepository<DormitoryRoom, Int>
+interface DormitoryInhabitatRepository: JpaRepository<DormitoryInhabitant, Int>

@@ -13,6 +13,8 @@ import com.programmer74.sdl1.finalrepositories.*
 import mu.KLogging
 import org.springframework.stereotype.Service
 import java.lang.Integer.max
+import java.lang.reflect.InvocationHandler
+import java.lang.reflect.Proxy
 import java.time.Instant
 import javax.annotation.PostConstruct
 
@@ -31,13 +33,11 @@ class DataETLService(
   private val conferenceRepository: ConferenceRepository,
   private val publicationRepository: PublicationRepository,
   private val projectRepository: ProjectRepository,
-  private val bookTakenRepository: BookTakenRepository
+  private val bookTakenRepository: BookTakenRepository,
+  private val dormitoryRepository: DormitoryRepository,
+  private val dormitoryRoomRepository: DormitoryRoomRepository,
+  private val dormitoryInhabitatRepository: DormitoryInhabitatRepository
 ) {
-
-  //oracle:  Assessment, Person, LessonEntry, StudyGroup         - 4/4 - OK
-  //postgre: Assessment, Discipline                              - 2/2 - OK
-  //mysql:   Person, Conference, Publication, Project, BookTaken - 5/5 - OK
-  //mongo                                                        - 0/4
 
   lateinit var mergedPersons: MutableList<MergedPerson>
 
@@ -57,10 +57,43 @@ class DataETLService(
 
   lateinit var booksTaken: List<BookTaken>
 
+  lateinit var dormitories: List<Dormitory>
+
+  lateinit var dormitoryRooms: List<DormitoryRoom>
+
+  lateinit var dormitoryInhabitants: List<DormitoryInhabitant>
+
   @PostConstruct
   fun start() {
     retrieveData()
-    val i = 1
+    logger.warn { "================================" }
+    logger.warn { "========JOB COMPLETED===========" }
+    logger.warn { "================================" }
+
+    logger.warn { "Statistics over collections:" }
+    this.javaClass.fields.map { it to it.get(this) }
+        .filter { it.second is List<*> }
+        .map { it.first to it.second as List<Any> }
+        .forEach {
+          logger.warn {
+            " - ${it.first.name} has ${it.second.size} entries; " +
+                "table name '${getTableName(it.second)}'"
+          }
+        }
+
+  }
+
+  private fun getTableName(list: List<Any>): String {
+    val o =
+        (Proxy.getInvocationHandler(list[0].javaClass.annotations.firstOrNull {
+          it.toString()
+              .contains("persistence.Table")
+        } as Proxy) as InvocationHandler)
+    val f =
+        this.javaClass.classLoader.loadClass("sun.reflect.annotation.AnnotationInvocationHandler")
+            .declaredFields.first { it.toString().contains("memberValues") }
+    f.isAccessible = true
+    return ((f.get(o) as Map<String, Any>)["name"] as String?) ?: "<unknown>"
   }
 
   private fun retrieveData() {
@@ -78,6 +111,7 @@ class DataETLService(
     loadSimplePostgreCollections()
     loadSimpleOracleCollections()
     loadSimpleMysqlCollections()
+    loadMongoCollections()
 
     if (mergedAssessmentRepository.findAll().isEmpty()) {
       logger.warn { "Merging and dumping mergedAssessments to db" }
@@ -89,7 +123,6 @@ class DataETLService(
       logger.warn { "Already dumped mergedAssessments to db" }
     }
     mergedAssessments = mergedAssessmentRepository.findAll()
-    val o = 1
   }
 
   private fun loadSimplePostgreCollections() {
@@ -165,6 +198,67 @@ class DataETLService(
     })
   }
 
+  private fun loadMongoCollections() {
+    dormitories = getOrLoadCollectionExcludingDuplicates(
+        "dormitories",
+        mongoRetriever.getMongoDormitoryInhabitats().map { it.livesAt.dormitory },
+        dormitoryRepository,
+        { Dormitory(null, it.address, it.totalRooms) },
+        { dto, entity -> entity.address == dto.address },
+        true
+    )
+    dormitoryRooms = getOrLoadCollectionExcludingDuplicates(
+        "dormitory rooms",
+        mongoRetriever.getMongoDormitoryInhabitats().map { it.livesAt },
+        dormitoryRoomRepository,
+        {
+          DormitoryRoom(
+              null,
+              dormitoryByAddress(it.dormitory.address),
+              it.roomNo,
+              it.maxInhabitats,
+              Instant.ofEpochMilli(it.latestDesinfection),
+              it.insects,
+              it.warnings)
+        },
+        { dto, entity -> (entity.dormitory.address == dto.dormitory.address) && (entity.roomNo == dto.roomNo) },
+        true
+    )
+    mergedPersons = getOrLoadCollectionExcludingDuplicates(
+        "persons merged with dormitory persons",
+        mongoRetriever.getMongoDormitoryInhabitats().map { it.person },
+        mergedPersonRepository,
+        { it.toNewMergedPerson() },
+        { dto, entity ->
+          if (entity.name == dto.name) {
+            if (entity.sid == dto.id) {
+              true
+            } else {
+              logger.error { "Person under name ${dto.name} has sid ${dto.id} in Mongo but id ${entity.sid} in MergedPerson table" }
+              false
+            }
+          } else false
+        },
+        false
+    )
+    dormitoryInhabitants = getOrLoadCollectionExcludingDuplicates(
+        "dormitory inhabitats",
+        mongoRetriever.getMongoDormitoryInhabitats(),
+        dormitoryInhabitatRepository,
+        {
+          DormitoryInhabitant(
+              null,
+              personByName(it.person.name)!!,
+              it.price,
+              it.latestAction,
+              Instant.ofEpochMilli(it.latestActionAt),
+              Instant.ofEpochMilli(it.livesFrom),
+              Instant.ofEpochMilli(it.livesTo),
+              dormitoryRoomByAddressAndRoomNo(it.livesAt.dormitory.address, it.livesAt.roomNo)
+          )
+        }, { dto, entity -> (entity.person.name == dto.person.name) }, true)
+  }
+
   private fun personByOracleId(id: Int) =
       mergedPersons.firstOrNull { it.idFromOracle != null && it.idFromOracle == id }
 
@@ -224,6 +318,11 @@ class DataETLService(
     return addedDiscipline
   }
 
+  private fun dormitoryByAddress(address: String) = dormitories.first { it.address == address }
+
+  private fun dormitoryRoomByAddressAndRoomNo(address: String, no: Int) = dormitoryRooms
+      .first { (it.dormitory.address == address) && (it.roomNo == no) }
+
   private fun mergePersons(
     oraclePersons: List<PersonDtoFromOracle>,
     mysqlPersons: List<PersonDtoFromMysql>
@@ -246,6 +345,7 @@ class DataETLService(
               it.faculty,
               it.position,
               it.isContractStudent,
+              null,
               Instant.ofEpochMilli(it.contractFrom),
               Instant.ofEpochMilli(it.contractTo),
               it.id,
@@ -260,6 +360,7 @@ class DataETLService(
               null,
               null,
               it.position,
+              null,
               null,
               null,
               null,
