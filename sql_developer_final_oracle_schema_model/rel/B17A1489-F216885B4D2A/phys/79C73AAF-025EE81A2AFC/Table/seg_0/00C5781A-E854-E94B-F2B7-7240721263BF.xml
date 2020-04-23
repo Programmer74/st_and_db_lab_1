@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="PUBLICATION_AUTHOR" directorySegmentName="seg_0" id="00C5781A-E854-E94B-F2B7-7240721263BF">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4D07BC2C-4869-38B4-5FB4-97C19525B3E0</segment>
+<tableSpace>6A84D115-30AF-62B2-1E48-A04791A7C976</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PUBLICATION_ID" id="2F50BCD4-4DD4-8365-63BA-137E7FE65D05">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PERSON_ID" id="E80361D6-22CD-1F7B-8549-8A7250133FAA">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FKJYR9H9DIU303VIFJON3MNOHI3" id="36CED687-1AC0-5C48-0D0C-661E806F3B23">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FKB13NM71RH2M11M4N8RATI97X4" id="A898D3A5-0C35-8F60-3BA1-8B42975E6F8C">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+</TableProxyOraclev12c>

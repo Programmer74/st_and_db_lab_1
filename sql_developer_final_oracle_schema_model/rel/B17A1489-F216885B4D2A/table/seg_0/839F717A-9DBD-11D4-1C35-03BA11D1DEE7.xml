@@ -1,0 +1,178 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="839F717A-9DBD-11D4-1C35-03BA11D1DEE7" schemaObject="8013F063-0848-B451-64C5-8623648A644E" name="DORMITORY_INHABITAT">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>C##ADMIN</sourceObjSchema>
+<sourceObjName>DORMITORY_INHABITAT</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="4BC86F2B-A6A7-B42F-B83F-A35B36BCE683">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+<autoIncrementCycle>false</autoIncrementCycle>
+<autoIncrementDisableCache>false</autoIncrementDisableCache>
+<autoIncrementCache>20</autoIncrementCache>
+<autoIncrementOrder>false</autoIncrementOrder>
+</Column>
+<Column name="LATEST_ACTION" id="30AE9971-CA88-B454-998A-9EEDCFFBD730">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>LATEST_ACTION</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LATEST_ACTION_AT" id="DDA5550F-C3A8-C324-A026-9E8B15605D29">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>LATEST_ACTION_AT</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LIVES_FROM" id="E582892A-F70A-EBD4-DE15-795A0677847A">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>LIVES_FROM</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LIVES_TO" id="42902CB0-E1DD-D59A-5066-D8D05196F832">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>LIVES_TO</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PRICE" id="BC285F25-A203-E712-9737-08B3EBEB3CE1">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>PRICE</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DORMITORY_ROOM_ID" id="F45902D5-A510-A72A-9567-317068667C18">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>DORMITORY_ROOM_ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="407CE365-9883-B232-0213-E4862AC208AC" referredColumn="27627A2D-AA1A-A417-5574-0BDCD9F61D31"/>
+</associations>
+</Column>
+<Column name="PERSON_ID" id="7AA01FDB-4868-31BC-F541-E6A24A638A41">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>DORMITORY_INHABITAT</sourceObjSchema>
+<sourceObjName>PERSON_ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="509CE124-3D22-D19D-7B44-B600371E7C22" referredColumn="1DA6B14F-0730-76D7-995B-E3510938B4A5"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="930D3086-3C62-C460-B083-24E465CB18F3" schemaObject="8013F063-0848-B451-64C5-8623648A644E" name="DORMITORY_INHABITAT_PK">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>C##ADMIN</sourceObjSchema>
+<sourceObjName>SYS_C008055</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4BC86F2B-A6A7-B42F-B83F-A35B36BCE683"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AC6AA91F-C66F-733A-606F-241B1714B2E7" name="FKI0Y183Y7C5VGAHEX0JD1D5PIG">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7AA01FDB-4868-31BC-F541-E6A24A638A41"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F6D2AEEC-68E2-76A7-C205-0E3C07E085AF" name="FKRLFYE0D8AJPCVEKA7JL3FBKEJ">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F45902D5-A510-A72A-9567-317068667C18"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

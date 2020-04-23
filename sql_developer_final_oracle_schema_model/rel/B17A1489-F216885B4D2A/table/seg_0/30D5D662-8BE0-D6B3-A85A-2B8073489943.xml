@@ -1,0 +1,165 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="30D5D662-8BE0-D6B3-A85A-2B8073489943" schemaObject="8013F063-0848-B451-64C5-8623648A644E" name="PUBLICATION">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>C##ADMIN</sourceObjSchema>
+<sourceObjName>PUBLICATION</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="AABCFBEC-A21F-2C8F-D68A-A9B9AAE6C252">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+<autoIncrementCycle>false</autoIncrementCycle>
+<autoIncrementDisableCache>false</autoIncrementDisableCache>
+<autoIncrementCache>20</autoIncrementCache>
+<autoIncrementOrder>false</autoIncrementOrder>
+</Column>
+<Column name="LANGUAGE" id="5089AA3A-D807-4C12-4520-D1B05FD52422">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>LANGUAGE</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAME" id="3EEEE5C2-0368-FEE4-4B21-383AD8BBFFF0">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>NAME</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PAGES" id="1C26303D-B0F5-68DA-7D18-230BB7428DBA">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>PAGES</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PUBLISHED_AT" id="37944658-04F0-B26C-128F-284A51FDB5C6">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>PUBLISHED_AT</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="QUOTE_INDEX" id="5EFF9C1D-8167-15D4-AC2A-833DBB1347C9">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>QUOTE_INDEX</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SOURCE" id="B0DD1E9D-F239-A03A-D0F2-91B8B40E79AF">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>SOURCE</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SOURCE_TYPE" id="888973D6-C94B-8F03-297E-33D93C803482">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>SOURCE_TYPE</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TYPE" id="E345C9A8-3D4C-FD33-8994-F48FE5628EC9">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>PUBLICATION</sourceObjSchema>
+<sourceObjName>TYPE</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1F200352-862E-BCB2-27F0-E1FAF7837A5E" schemaObject="8013F063-0848-B451-64C5-8623648A644E" name="PUBLICATION_PK">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>C##ADMIN</sourceObjSchema>
+<sourceObjName>SYS_C008035</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AABCFBEC-A21F-2C8F-D68A-A9B9AAE6C252"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

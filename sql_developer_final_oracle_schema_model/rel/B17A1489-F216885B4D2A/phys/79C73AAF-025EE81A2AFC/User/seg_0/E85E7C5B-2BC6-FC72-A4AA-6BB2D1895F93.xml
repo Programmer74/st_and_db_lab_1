@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<UserOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UserOraclev10g" name="C##ADMIN" directorySegmentName="seg_0" id="E85E7C5B-2BC6-FC72-A4AA-6BB2D1895F93">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjName>C##ADMIN</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:56 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+</UserOraclev10g>

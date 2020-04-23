@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="PUBLICATION" directorySegmentName="seg_0" id="30D5D662-8BE0-D6B3-A85A-2B8073489943">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4D07BC2C-4869-38B4-5FB4-97C19525B3E0</segment>
+<tableSpace>6A84D115-30AF-62B2-1E48-A04791A7C976</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PAGES" id="1C26303D-B0F5-68DA-7D18-230BB7428DBA">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PUBLISHED_AT" id="37944658-04F0-B26C-128F-284A51FDB5C6">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NAME" id="3EEEE5C2-0368-FEE4-4B21-383AD8BBFFF0">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LANGUAGE" id="5089AA3A-D807-4C12-4520-D1B05FD52422">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="QUOTE_INDEX" id="5EFF9C1D-8167-15D4-AC2A-833DBB1347C9">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SOURCE_TYPE" id="888973D6-C94B-8F03-297E-33D93C803482">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID" id="AABCFBEC-A21F-2C8F-D68A-A9B9AAE6C252">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<autoIncrementDDL>IDENTITY_CLAUSE</autoIncrementDDL>
+</ColumnProxy>
+<ColumnProxy name="SOURCE" id="B0DD1E9D-F239-A03A-D0F2-91B8B40E79AF">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TYPE" id="E345C9A8-3D4C-FD33-8994-F48FE5628EC9">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PUBLICATION_PK" id="1F200352-862E-BCB2-27F0-E1FAF7837A5E">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+<segment>92C1EE38-5C3B-569C-5E79-24981F493934</segment>
+<tableSpace>6A84D115-30AF-62B2-1E48-A04791A7C976</tableSpace>
+<indexSegment>92C1EE38-5C3B-569C-5E79-24981F493934</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

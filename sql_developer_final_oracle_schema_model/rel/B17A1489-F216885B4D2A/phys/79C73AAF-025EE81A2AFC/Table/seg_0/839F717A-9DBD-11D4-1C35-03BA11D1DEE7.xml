@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="DORMITORY_INHABITAT" directorySegmentName="seg_0" id="839F717A-9DBD-11D4-1C35-03BA11D1DEE7">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4D07BC2C-4869-38B4-5FB4-97C19525B3E0</segment>
+<tableSpace>6A84D115-30AF-62B2-1E48-A04791A7C976</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="LATEST_ACTION" id="30AE9971-CA88-B454-998A-9EEDCFFBD730">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LIVES_TO" id="42902CB0-E1DD-D59A-5066-D8D05196F832">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID" id="4BC86F2B-A6A7-B42F-B83F-A35B36BCE683">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<autoIncrementDDL>IDENTITY_CLAUSE</autoIncrementDDL>
+</ColumnProxy>
+<ColumnProxy name="PERSON_ID" id="7AA01FDB-4868-31BC-F541-E6A24A638A41">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PRICE" id="BC285F25-A203-E712-9737-08B3EBEB3CE1">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LATEST_ACTION_AT" id="DDA5550F-C3A8-C324-A026-9E8B15605D29">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LIVES_FROM" id="E582892A-F70A-EBD4-DE15-795A0677847A">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DORMITORY_ROOM_ID" id="F45902D5-A510-A72A-9567-317068667C18">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FKI0Y183Y7C5VGAHEX0JD1D5PIG" id="AC6AA91F-C66F-733A-606F-241B1714B2E7">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FKRLFYE0D8AJPCVEKA7JL3FBKEJ" id="F6D2AEEC-68E2-76A7-C205-0E3C07E085AF">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="DORMITORY_INHABITAT_PK" id="930D3086-3C62-C460-B083-24E465CB18F3">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+<segment>92C1EE38-5C3B-569C-5E79-24981F493934</segment>
+<tableSpace>6A84D115-30AF-62B2-1E48-A04791A7C976</tableSpace>
+<indexSegment>92C1EE38-5C3B-569C-5E79-24981F493934</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

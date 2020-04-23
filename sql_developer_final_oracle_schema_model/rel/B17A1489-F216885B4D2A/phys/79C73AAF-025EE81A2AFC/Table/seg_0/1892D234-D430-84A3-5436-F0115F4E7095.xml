@@ -1,0 +1,96 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="DISCIPLINE" directorySegmentName="seg_0" id="1892D234-D430-84A3-5436-F0115F4E7095">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4D07BC2C-4869-38B4-5FB4-97C19525B3E0</segment>
+<tableSpace>6A84D115-30AF-62B2-1E48-A04791A7C976</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ID" id="03DFD1CF-4A27-E363-C2FC-8402E5EFA621">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<autoIncrementDDL>IDENTITY_CLAUSE</autoIncrementDDL>
+</ColumnProxy>
+<ColumnProxy name="DISCIPLINE_NAME" id="07D8987F-A95D-A6CF-CBF8-59D5744FCDDE">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STUDY_STANDARD" id="480E470B-5386-6736-E2EB-A60343CC4F2B">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DISCIPLINE_ID_FROM_POSTGRE" id="5C8BDFBA-931E-545F-6F2F-3D222B241ADD">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="UNIVERSITY_NAME" id="624B6AF1-ECDA-F30D-6440-F0213633B96C">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PRACTICE_HOURS" id="8C1CA17B-714A-5115-0927-6556A35FCCB7">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LAB_HOURS" id="9B065E8E-BDB0-1445-A490-92AA623EDEAD">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SEMESTER" id="B2D145C1-5002-8E48-E7D2-A111F977703E">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="FACULTY" id="BEA430AE-6A93-3115-CD34-7F0C262D4E8F">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LECTION_HOURS" id="C07B3A51-0786-446B-4175-6F0C46E43269">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="IS_EXAM" id="D0E54569-F808-FF9F-57D0-4CF4B1ACD994">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STUDY_FORM" id="E6C0774F-13F8-E7E4-3FCF-5A70B150A7E7">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SPECIALITY" id="FD6C7C02-06AD-1B4A-26C2-DBBE6D72D040">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="DISCIPLINE_PK" id="49C30EB8-4B65-8C5A-423D-A809F683D301">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<schemaObject>8013F063-0848-B451-64C5-8623648A644E</schemaObject>
+<segment>92C1EE38-5C3B-569C-5E79-24981F493934</segment>
+<tableSpace>6A84D115-30AF-62B2-1E48-A04791A7C976</tableSpace>
+<indexSegment>92C1EE38-5C3B-569C-5E79-24981F493934</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

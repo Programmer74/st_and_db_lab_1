@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6F9D9C8E-D159-42DE-CC0E-895297AF75A5" schemaObject="8013F063-0848-B451-64C5-8623648A644E" name="STUDY_GROUP_PARTICIPANT_RELOADED">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>C##ADMIN</sourceObjSchema>
+<sourceObjName>STUDY_GROUP_PARTICIPANT_RELOADED</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="STUDY_GROUP_ID" id="1F49712A-74E4-85A5-A5D5-046DC7A3F525">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>STUDY_GROUP_PARTICIPANT_RELOADED</sourceObjSchema>
+<sourceObjName>STUDY_GROUP_ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F7E56012-A47C-8AF7-E8DD-C93D4EB0F986" referredColumn="565F07F0-4C19-371D-B5B5-2EB7FD1A6750"/>
+</associations>
+</Column>
+<Column name="PERSON_ID" id="3A7EC7AD-5087-CA7C-B2AD-B1BC1DE93D82">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>STUDY_GROUP_PARTICIPANT_RELOADED</sourceObjSchema>
+<sourceObjName>PERSON_ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0A2B815C-B5B3-8EB4-F975-BD8A36C5AE81" referredColumn="1DA6B14F-0730-76D7-995B-E3510938B4A5"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C5B488C1-88EE-3860-FCA3-339DE6DD55B6" name="FK81X5KWVLBVP709HTUR9XIWU6O">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1F49712A-74E4-85A5-A5D5-046DC7A3F525"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CBDCA419-9FC4-0E9D-96A6-7CD3E84B0FF4" name="FKRC751JOUFS4H0VIPXNEXR5PXO">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3A7EC7AD-5087-CA7C-B2AD-B1BC1DE93D82"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

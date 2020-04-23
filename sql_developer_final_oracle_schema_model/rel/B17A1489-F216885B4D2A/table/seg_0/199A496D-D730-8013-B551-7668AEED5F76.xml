@@ -1,0 +1,215 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="199A496D-D730-8013-B551-7668AEED5F76" schemaObject="8013F063-0848-B451-64C5-8623648A644E" name="MERGED_ASSESSMENT">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>C##ADMIN</sourceObjSchema>
+<sourceObjName>MERGED_ASSESSMENT</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="068BAEAB-9350-8CEF-61A1-10FE1C0BA2C7">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<identityColumn>true</identityColumn>
+<autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+<autoIncrementCycle>false</autoIncrementCycle>
+<autoIncrementDisableCache>false</autoIncrementDisableCache>
+<autoIncrementCache>20</autoIncrementCache>
+<autoIncrementOrder>false</autoIncrementOrder>
+</Column>
+<Column name="ACHIEVED_AT" id="0CBEA1BF-F0B9-B28E-C35A-81BE3A58316C">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>ACHIEVED_AT</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DISCIPLINE_ID" id="7BC72680-4468-86A1-B2A4-49B2E1A8923B">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>DISCIPLINE_ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CFC6A029-AD17-7FBF-8C8A-0EEF660F8188" referredColumn="03DFD1CF-4A27-E363-C2FC-8402E5EFA621"/>
+</associations>
+</Column>
+<Column name="MARK" id="5F1570F7-B16E-C007-0667-56653EBF6F20">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>MARK</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MARK_LETTER" id="2DD32FE0-09AC-779A-07B7-2E51D04F341E">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>MARK_LETTER</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STUDENT_ID" id="A3BAD095-83FD-D8E7-0F81-69C1F9D2748C">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>STUDENT_ID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="30B19D5F-96EC-89B3-CF46-0AB75985A2A3" referredColumn="1DA6B14F-0730-76D7-995B-E3510938B4A5"/>
+</associations>
+</Column>
+<Column name="STUDENT_NAME" id="29A6E99A-4AB6-9EFF-A510-99DD1B5E9270">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>STUDENT_NAME</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STUDENT_SID" id="FCE8739C-8A2B-D82B-9806-21F7D53EE7E2">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>STUDENT_SID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEACHER_NAME" id="74E3148E-AEE5-4E1B-3BD2-228AC99383E1">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>TEACHER_NAME</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEACHER_SID" id="F3CFA2E7-2174-6E7D-6168-8009287825B9">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>MERGED_ASSESSMENT</sourceObjSchema>
+<sourceObjName>TEACHER_SID</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:57 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9664D47F-4506-44F0-E804-F9082742466B" schemaObject="8013F063-0848-B451-64C5-8623648A644E" name="MERGED_ASSESSMENT_PK">
+<sourceConnName>oracle at localhost</sourceConnName>
+<sourceObjSchema>C##ADMIN</sourceObjSchema>
+<sourceObjName>SYS_C007847</sourceObjName>
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="068BAEAB-9350-8CEF-61A1-10FE1C0BA2C7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5B08CE4C-BDAA-21ED-B07C-4DE5F1A3322C" name="FKC7XQCRVIKK6L9C65FPI5FLEPD">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7BC72680-4468-86A1-B2A4-49B2E1A8923B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="73938AAB-CA4D-35F7-E94F-DA5DA61921BA" name="FKKKRMUOFT3BJI2N1IFBT9N2FQN">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:58 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A3BAD095-83FD-D8E7-0F81-69C1F9D2748C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

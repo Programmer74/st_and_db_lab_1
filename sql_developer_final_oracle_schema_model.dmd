@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="sql_developer_final_oracle_schema_model" id="3499FC01-E02C-C7A5-02BE-CC5B9050B09A" version="3.5">
+<createdBy>hotaro</createdBy>
+<createdTime>2020-04-23 16:05:24 UTC</createdTime>
+<ownerDesignName>sql_developer_final_oracle_schema_model</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>3499FC01-E02C-C7A5-02BE-CC5B9050B09A</designId>
+</OSDM_Design>
