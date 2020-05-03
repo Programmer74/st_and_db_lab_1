@@ -3,7 +3,7 @@ package com.programmer74.sdl1.finalentities
 import javax.persistence.*
 
 @Entity
-@Table(name = "lesson_entry_reloaded")
+@Table(name = "lesson_entry_rld")
 data class LessonEntry(
 
   @Id

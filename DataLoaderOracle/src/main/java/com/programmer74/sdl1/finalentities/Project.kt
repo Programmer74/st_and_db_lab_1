@@ -4,7 +4,7 @@ import java.time.Instant
 import javax.persistence.*
 
 @Entity
-@Table(name = "project_loaded")
+@Table(name = "project_ldd")
 data class Project(
 
   @Id

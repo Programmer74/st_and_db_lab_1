@@ -386,7 +386,10 @@ class DataETLService(
               (person.name == postgre.studentName)
         },
         {
-          val person = personByOracleId(it.achievedByIdFromOracle)
+          var person = personByOracleId(it.achievedByIdFromOracle)
+          if (person == null) {
+            person = getOrAddPersonByOracleId(it.achievedByIdFromOracle)
+          }
           MergedAssessment(
               -1,
               getOrAddDisciplineByName(it.disciplineName),
@@ -395,9 +398,9 @@ class DataETLService(
               Instant.ofEpochMilli(it.achievedAt),
               null,
               null,
-              person?.name,
-              person?.sid,
-              person!!
+              person.name,
+              person.sid,
+              person
           )
         },
         { ora, ps ->
@@ -415,6 +418,8 @@ class DataETLService(
           )
         },
         { ps ->
+          val personByName = personByName(ps.studentName)
+          if (personByName != null) {
           MergedAssessment(
               -1,
               disciplineByPostgresId(ps.disciplineIdFromPostgre),
@@ -425,8 +430,8 @@ class DataETLService(
               null,
               ps.studentName,
               null,
-              personByName(ps.studentName)!!
-          )
+              personByName
+          )} else null
         },
         { "${it.achievedAt} ${it.studentName} ${it.mark}" }
     )

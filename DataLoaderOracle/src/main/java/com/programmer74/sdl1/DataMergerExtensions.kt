@@ -9,9 +9,9 @@ fun <A, B, C> mergeCollections(
   collectionA: List<A>,
   collectionB: List<B>,
   comparatorAB: (A, B) -> Boolean,
-  constructorA: (A) -> C,
-  constructorAB: (A, B) -> C,
-  constructorB: (B) -> C,
+  constructorA: (A) -> C?,
+  constructorAB: (A, B) -> C?,
+  constructorB: (B) -> C?,
   uniquenessField: (C) -> Any
 ): List<C> {
   val mutA = collectionA.toMutableList()
@@ -25,17 +25,26 @@ fun <A, B, C> mergeCollections(
     val entityA = iterA.next()
     val entityB = mutB.firstOrNull { comparatorAB.invoke(entityA, it) }
     if (entityB == null) {
-      result.add(constructorA.invoke(entityA))
+      val newFromA = constructorA.invoke(entityA)
+      if (newFromA != null) {
+        result.add(newFromA)
+      }
       iterA.remove()
     } else {
-      result.add(constructorAB.invoke(entityA, entityB))
+      val newFromAB = constructorAB.invoke(entityA, entityB)
+      if (newFromAB != null) {
+        result.add(newFromAB)
+      }
       iterA.remove()
       mutB.remove(entityB)
     }
   }
 
   mutB.forEach {
-    result.add(constructorB(it))
+    val newFromB = constructorB.invoke(it)
+    if (newFromB != null) {
+      result.add(newFromB)
+    }
   }
 
   result.forEach { res ->

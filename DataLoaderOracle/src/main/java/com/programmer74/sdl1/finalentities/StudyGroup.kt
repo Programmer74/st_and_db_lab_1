@@ -3,7 +3,7 @@ package com.programmer74.sdl1.finalentities
 import javax.persistence.*
 
 @Entity
-@Table(name = "study_group_reloaded")
+@Table(name = "study_group_rld")
 data class StudyGroup(
 
   @Id
@@ -36,7 +36,7 @@ data class StudyGroup(
         CascadeType.MERGE
       ])
   @JoinTable(
-      name = "study_group_lesson_entry_reloaded",
+      name = "st_grp_lessn_entry_rld",
       joinColumns = [JoinColumn(name = "study_group_id")],
       inverseJoinColumns = [JoinColumn(name = "lesson_entry_id")])
   val lessons: MutableList<LessonEntry> = ArrayList(),
@@ -48,7 +48,7 @@ data class StudyGroup(
         CascadeType.MERGE
       ])
   @JoinTable(
-      name = "study_group_participant_reloaded",
+      name = "st_grp_partcpnt_rld",
       joinColumns = [JoinColumn(name = "study_group_id")],
       inverseJoinColumns = [JoinColumn(name = "person_id")])
   val participants: MutableList<MergedPerson> = ArrayList()

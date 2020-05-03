@@ -3,9 +3,9 @@ spring:
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5
-    url: jdbc:oracle:thin:@localhost:1521:XE
-    username: c##admin
-    password: admin
+    url: jdbc:oracle:thin:@//localhost:1521/pdb1.localdomain
+    username: olaptrain
+    password: qwe1234
     driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     hibernate:

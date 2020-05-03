@@ -4,7 +4,7 @@ import java.time.Instant
 import javax.persistence.*
 
 @Entity
-@Table(name = "merged_person")
+@Table(name = "mgd_person")
 data class MergedPerson(
 
   @Id
